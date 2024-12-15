@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memory Timeline</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cursive', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff0f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff69b4;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Timeline line with animation */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 100%;
+      background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%27http%3A//www.w3.org/2000/svg%27 viewBox%3D%270 0 10 100%27%3E%3Cpath d%3D%27M 5 0 Q 0 25 5 50 Q 10 75 5 100 Z%27 fill%3D%27none%27 stroke%3D%27%23ff69b4%27 stroke-width%3D%274%27/%3E%3C/svg%3E');
+      top: 0;
+      left: 50%;
+      margin-left: -2px;
+      animation: flow 4s infinite linear;
+    }
+
+    /* Keyframes for flowing animation */
+    @keyframes flow {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100%;
+      }
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+
+    .timeline-item.left {
+      left: 0;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      top: 15px;
+    }
+
+    .timeline-item.left::after {
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #ff69b4 transparent transparent;
+      left: 100%;
+    }
+
+    .timeline-item.right::after {
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent #ff69b4;
+      right: 100%;
+    }
+
+    .content {
+      padding: 20px;
+      background-color: #fff0f5;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+      border: 1px solid #ffb6c1;
+      transition: transform 0.3s ease;
+    }
+
+    .content:hover {
+      transform: scale(1.05);
+      background-color: #ffe4e1;
+    }
+
+    .date {
+      position: absolute;
+      top: 12px;
+      width: 25px;
+      height: 25px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      left: 50%;
+      margin-left: -12px;
+    }
+
+    .timeline-item.left .date {
+      left: auto;
+      right: -12px;
+    }
+
+    .timeline-item.right .date {
+      left: -12px;
+    }
+
+    /* Modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fff0f5;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ff69b4;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+    }
+
+    .close {
+      color: #ff69b4;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #ff1493;
+    }
+
+    /* Mobile responsive */
+    @media screen and (max-width: 600px) {
+      .timeline-item.left, .timeline-item.right {
+        width: 100%;
+        left: 0;
+      }
+
+      .timeline-item::after {
+        left: 50px;
+        right: auto;
+      }
+
+      .timeline::before {
+        left: 0;
+      }
+
+      .date {
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Our Memories</h1>
+
+  <div class="timeline">
+    <div class="timeline-item left" style="margin-bottom: 100px;" onclick="openModal('I saw you', '', 'I still remember the first time I actually talked to you, not knowing how much you would mean to me.')">
+      <div class="content">
+        <h3>I saw you</h3>
+        <p>Click to see more details.</p>
+      </div>
+      <div class="date">October 2023</div>
+    </div>
+
+    <div class="timeline-item right" style="margin-bottom: 200px;" onclick="openModal('I realised I like you', 'photo1.PNG', 'I was at the NCSC nationals and saw a photo of you at the excursion. For some reasons, I felt upset and jealous that I wasn\'t there with you.')">
+      <div class="content">
+        <h3>I realised I like you</h3>
+        <p>Click to see more details.</p>
+      </div>
+      <div class="date">29th November 2023</div>
+    </div>
+
+    <div class="timeline-item left" style="margin-bottom: 300px;" onclick="openModal('Trying to forget you!!!', '', 'I kept shutting off my feelings for you, but they kept coming back every time I saw you.')">
+        <div class="content">
+          <h3>Trying to forget you!!!</h3>
+          <p>Click to see more details.</p>
+        </div>
+        <div class="date">January 2024</div>
+      </div>
+  
+      <div class="timeline-item right" style="margin-bottom: 70px;" onclick="openModal('I fell in love', 'annualdaypractice.jpeg', 'I walked into the class for our play practice and saw you making your hair. For some reason, that moment stayed in my head all day.')">
+        <div class="content">
+          <h3>I fell in love</h3>
+          <p>Click to see more details.</p>
+        </div>
+        <div class="date">23rd April 2024</div>
+      </div>
+  
+      <div class="timeline-item left" style="margin-bottom: 100px;" onclick="openModal('OUR ICONIC PHOTO!!!', 'iconicphoto.jpeg', 'This photo will go on the wall one day!')">
+        <div class="content">
+          <h3>OUR ICONIC PHOTO!!!</h3>
+          <p>Click to see more details.</p>
+        </div>
+        <div class="date">30th April 2024</div>
+      </div>
+  
+      <div class="timeline-item right" style="margin-bottom: 100px;" onclick="openModal('We started talking everyday on WhatsApp', '', 'Do you remember what and when the first message was?')">
+        <div class="content">
+          <h3>We started talking everyday on WhatsApp</h3>
+          <p>Click to see more details.</p>
+        </div>
+        <div class="date">1st May 2024</div>
+      </div>
+  
+      <div class="timeline-item left" style="margin-bottom: 60px;" onclick="openModal('We got caught talking!!!', '', 'I remember how scared you were.')">
+        <div class="content">
+          <h3>We got caught talking!!!</h3>
+          <p>Click to see more details.</p>
+        </div>
+        <div class="date">9th June 2024</div>
+      </div>
+  
+      <div class="timeline-item right" style="margin-bottom: 60px;" onclick="openModal('You asked me out!!!', '', 'Best day of my life!!!')">
+          <div class="content">
+            <h3>You asked me out!!!</h3>
+            <p>Click to see more details.</p>
+          </div>
+          <div class="date">21th June 2024</div>
+        </div>
+  
+        <div class="timeline-item left" style="margin-bottom: 100px;" onclick="openModal('The first flower you gave me', '', 'I still have that flower with me.')">
+          <div class="content">
+            <h3>The first flower you gave me</h3>
+            <p>Click to see more details.</p>
+          </div>
+          <div class="date">26th June 2024</div>
+        </div>
+
+  
+        <div class="timeline-item right" style="margin-bottom: 100px;" onclick="openModal('OUR FIRST MONTH ANNIVERSARYYY', '', 'Do you remember what I gifted youuu')">
+          <div class="content">
+            <h3>OUR FIRST MONTH ANNIVERSARYYY</h3>
+            <p>Click to see more details.</p>
+          </div>
+          <div class="date">21st July, 2024</div>
+        </div>
+  
+        <div class="timeline-item left" style="margin-bottom: 60px;" onclick="openModal('PALLAVI MAM CAUGHT US!!!', '', 'It was a wild dayyy')">
+          <div class="content">
+            <h3>PALLAVI MAM CAUGHT US!!!</h3>
+            <p>Click to see more details.</p>
+          </div>
+          <div class="date">12th August 2024</div>
+        </div>
+  
+        <div class="timeline-item right" style="margin-bottom: 60px;" onclick="openModal('You Downloaded Instagram', 'Capture.PNG', 'I remember you stalking me 😹')">
+          <div class="content">
+            <h3>You Downloaded Instagram</h3>
+            <p>Click to see more details.</p>
+          </div>
+          <div class="date">15th August 2024</div>
+        </div>
+  
+        <div class="timeline">
+          <!-- Timeline Line: Before the Dark Period -->
+          <div class="timeline-line pink"></div>
+        
+          <!-- Breakup Event -->
+          <div class="timeline-item left" style="margin-bottom: 200px;" onclick="openModal('We broke up...', 'sadday.png', 'You had to focus on your studies and I was somewhat of a distraction... I still remember how sad we both were')">
+            <div class="content" style="background-color: #ffe4e1; border: 1px solid #d3d3d3;">
+              <h3>We broke up...</h3>
+              <p>Click to see more details.</p>
+            </div>
+            <div class="date" style="background-color: gray;">24th September 2024</div>
+          </div>
+        
+          <!-- Timeline Line: Dark Period -->
+          <div class="timeline-line dark"></div>
+          <p style="text-align: center; color: gray; font-style: italic; margin-top: 0px;">A quiet, somber time...</p>
+        
+          <!-- Get Back Together Event -->
+          <div class="timeline-item right" style="margin-bottom: 140px;" onclick="openModal('WE GOT BACK TOGETHERRR', '', 'YESSSSSSSSSSSSS')">
+            <div class="content" style="background-color: #ffebcd; border: 1px solid #ffa07a;">
+              <h3>WE GOT BACK TOGETHERRR</h3>
+              <p>Click to see more details.</p>
+            </div>
+            <div class="date" style="background-color: #ff69b4;">8th October 2024</div>
+          </div>
+        
+          <!-- Timeline Line: After the Dark Period -->
+          <div class="timeline-line pink"></div>
+        </div>
+
+        <div class="timeline-item left" style="margin-bottom: 0px;" onclick="openModal('YOUR BIRTHDAYYYY', '', 'IM SOWWIEEE I COULDNT GIVE YOU THE GIFT ON TIMEEE')">
+            <div class="content">
+              <h3>YOUR BIRTHDAYYYY</h3>
+              <p>Click to see more details.</p>
+            </div>
+            <div class="date">27th november, 2024</div>
+          </div>
+        
+          <!-- Timeline Line: Dark Period -->
+          <div class="timeline-line dark"></div>
+          <p style="text-align: center; color: pink; font-style: italic; margin-top: -20px;">I can't wait to see what the future has for us.</p>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <img id="modal-image" src="" alt="Memory Image" style="width:100%; max-height: 300px; object-fit: cover;">
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+  <script>
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    function openModal(title, imageUrl, description) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-image').src = imageUrl ? imageUrl : '';
+      document.getElementById('modal-description').innerText = description;
+      modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
