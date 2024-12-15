@@ -189,6 +189,30 @@
   </style>
 </head>
 <body>
+   <!-- Password Modal -->
+<div id="passwordModal" class="modal" style="display: block;">
+  <div class="modal-content" style="text-align: center; padding: 20px; width: 300px; margin: 100px auto; background: #fff0f5; border-radius: 10px; box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);">
+    <h3 style="color: #ff69b4;">Enter Password</h3>
+    <input type="password" id="passwordInput" style="width: 80%; padding: 10px; margin: 10px 0; border: 1px solid #ffb6c1; border-radius: 5px;" placeholder="Password">
+    <button onclick="checkPassword()" style="padding: 10px 20px; border: none; background-color: #ff69b4; color: white; border-radius: 5px; cursor: pointer;">Submit</button>
+    <p id="errorMessage" style="color: red; font-size: 14px; display: none;">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<script>
+  // Password check function
+  function checkPassword() {
+    const correctPassword = "ChinuAndCherry"; // Set your password here
+    const inputPassword = document.getElementById("passwordInput").value;
+    const errorMessage = document.getElementById("errorMessage");
+
+    if (inputPassword === correctPassword) {
+      document.getElementById("passwordModal").style.display = "none"; // Close modal
+    } else {
+      errorMessage.style.display = "block"; // Show error message
+    }
+  }
+</script>
 
   <h1>Our Memories</h1>
 
